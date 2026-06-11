@@ -1,0 +1,202 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #050d1a;
+  --surface: #0a1628;
+  --surface-2: #0f1f38;
+  --border: rgba(255,255,255,0.07);
+  --border-bright: rgba(255,255,255,0.14);
+  --text-primary: #f0f6ff;
+  --text-secondary: rgba(200,220,255,0.55);
+  --text-muted: rgba(150,180,220,0.35);
+
+  --tech:    #38bdf8;
+  --trade:   #fbbf24;
+  --mil:     #f87171;
+  --green:   #34d399;
+  --purple:  #a78bfa;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  background-color: var(--bg);
+  color: var(--text-primary);
+  font-family: system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Subtle animated grid background */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(56,189,248,0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56,189,248,0.022) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Radial glow at top */
+body::after {
+  content: "";
+  position: fixed;
+  top: -20vh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80vw;
+  height: 60vh;
+  background: radial-gradient(ellipse at 50% 0%, rgba(56,189,248,0.06) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Everything above the decorative layer */
+#__next, main, nav { position: relative; z-index: 1; }
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(56,189,248,0.2); border-radius: 2px; }
+
+/* Monospace numbers */
+.mono { font-family: "SF Mono", "Fira Code", "Consolas", monospace; }
+
+/* Fade-in animation */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fadeUp 0.4s ease forwards; }
+
+/* Slide-in animation for debate cards */
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-8px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.slide-in { animation: slideIn 0.35s ease forwards; }
+
+/* Pulse glow for active nation */
+@keyframes nationPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(56,189,248,0); }
+  50%       { box-shadow: 0 0 24px 2px rgba(56,189,248,0.18); }
+}
+.nation-pulse { animation: nationPulse 2s ease-in-out infinite; }
+
+/* Stamp animation */
+@keyframes stampIn {
+  0%   { opacity: 0; transform: scale(1.6) rotate(-12deg); }
+  60%  { opacity: 1; transform: scale(0.92) rotate(-12deg); }
+  100% { opacity: 1; transform: scale(1) rotate(-12deg); }
+}
+.stamp-in { animation: stampIn 0.3s cubic-bezier(0.22,1,0.36,1) forwards; }
+
+/* Ticker scroll */
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.ticker-scroll { animation: ticker 40s linear infinite; }
+.ticker-scroll:hover { animation-play-state: paused; }
+
+/* Confirmed pulse */
+@keyframes confirmedPulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.6; }
+}
+.confirmed-pulse { animation: confirmedPulse 2s ease-in-out 3; }
+
+
+/* ── Phase 3 additions ─────────────────────────────────────────────────────── */
+
+/* Number count-up flash */
+@keyframes statFlashGreen {
+  0%   { color: #34d399; text-shadow: 0 0 12px rgba(52,211,153,0.8); }
+  100% { color: inherit; text-shadow: none; }
+}
+@keyframes statFlashRed {
+  0%   { color: #f87171; text-shadow: 0 0 12px rgba(248,113,113,0.8); }
+  100% { color: inherit; text-shadow: none; }
+}
+.stat-up   { animation: statFlashGreen 1.2s ease forwards; }
+.stat-down { animation: statFlashRed   1.2s ease forwards; }
+
+/* New-cycle full-page ripple */
+@keyframes cycleRipple {
+  0%   { opacity: 0.35; transform: scale(0.92); }
+  60%  { opacity: 0.12; transform: scale(1.04); }
+  100% { opacity: 0;    transform: scale(1.08); }
+}
+.cycle-ripple {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  border: 2px solid rgba(56,189,248,0.6);
+  border-radius: 0;
+  z-index: 9999;
+  animation: cycleRipple 0.9s cubic-bezier(0.22,1,0.36,1) forwards;
+}
+
+/* Sequential reveal stagger */
+@keyframes revealCard {
+  from { opacity: 0; transform: translateY(16px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0)   scale(1);    }
+}
+.reveal-card {
+  animation: revealCard 0.45s cubic-bezier(0.22,1,0.36,1) both;
+}
+
+/* Dramatic event banner */
+@keyframes bannerSlide {
+  from { opacity: 0; transform: translateY(-100%); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes bannerFade {
+  0%   { opacity: 1; }
+  70%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+.event-banner {
+  animation: bannerSlide 0.4s cubic-bezier(0.22,1,0.36,1) forwards,
+             bannerFade 4s ease forwards;
+}
+
+/* World status strip gradient sweep */
+@keyframes gradientSweep {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.gradient-sweep {
+  background-size: 200% 200%;
+  animation: gradientSweep 6s ease infinite;
+}
+
+/* Breathing glow on live indicator */
+@keyframes breatheGlow {
+  0%, 100% { box-shadow: 0 0 0   0   rgba(34,197,94,0.0); }
+  50%       { box-shadow: 0 0 16px 2px rgba(34,197,94,0.3); }
+}
+.breathe-glow { animation: breatheGlow 3s ease-in-out infinite; }
+
+/* Scan line — used in the world status strip */
+@keyframes scanLine {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(100%); }
+}
+.scan-line {
+  position: absolute;
+  inset-y: 0;
+  width: 40%;
+  background: linear-gradient(90deg, transparent, rgba(56,189,248,0.06), transparent);
+  animation: scanLine 3s ease-in-out infinite;
+}
+
+/* Subtle float for empty state icon */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-6px); }
+}
+.float { animation: float 3s ease-in-out infinite; }

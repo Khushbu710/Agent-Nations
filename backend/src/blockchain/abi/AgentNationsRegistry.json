@@ -1,0 +1,85 @@
+[
+  {
+    "type": "function",
+    "name": "getAllStates",
+    "stateMutability": "view",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "nations",
+        "type": "tuple[3]",
+        "components": [
+          { "name": "name",           "type": "string"  },
+          { "name": "treasury",       "type": "uint256" },
+          { "name": "techScore",      "type": "uint16"  },
+          { "name": "militaryScore",  "type": "uint16"  },
+          { "name": "diplomacyScore", "type": "uint16"  },
+          { "name": "lastAction",     "type": "uint8"   }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "function",
+    "name": "getCycleNumber",
+    "stateMutability": "view",
+    "inputs": [],
+    "outputs": [
+      { "name": "", "type": "uint256" }
+    ]
+  },
+  {
+    "type": "function",
+    "name": "executeAction",
+    "stateMutability": "nonpayable",
+    "inputs": [
+      { "name": "nationIdx",  "type": "uint8" },
+      { "name": "action",     "type": "uint8" },
+      { "name": "targetIdx",  "type": "uint8" }
+    ],
+    "outputs": []
+  },
+  {
+    "type": "function",
+    "name": "advanceCycle",
+    "stateMutability": "nonpayable",
+    "inputs": [],
+    "outputs": []
+  },
+  {
+    "type": "event",
+    "name": "ActionExecuted",
+    "inputs": [
+      { "name": "cycle",      "type": "uint256", "indexed": true  },
+      { "name": "nationIdx",  "type": "uint8",   "indexed": true  },
+      { "name": "action",     "type": "uint8",   "indexed": false },
+      { "name": "targetIdx",  "type": "uint8",   "indexed": false }
+    ]
+  },
+  {
+    "type": "event",
+    "name": "CycleAdvanced",
+    "inputs": [
+      { "name": "newCycle", "type": "uint256", "indexed": true }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "InvalidNationIndex",
+    "inputs": [{ "name": "nationIdx", "type": "uint8" }]
+  },
+  {
+    "type": "error",
+    "name": "InvalidTarget",
+    "inputs": [{ "name": "targetIdx", "type": "uint8" }]
+  },
+  {
+    "type": "error",
+    "name": "InsufficientTreasury",
+    "inputs": [
+      { "name": "nationIdx",  "type": "uint8"   },
+      { "name": "required",   "type": "uint256" },
+      { "name": "available",  "type": "uint256" }
+    ]
+  }
+]

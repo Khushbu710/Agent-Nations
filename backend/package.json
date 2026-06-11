@@ -1,0 +1,31 @@
+{
+  "name": "agent-nations-backend",
+  "version": "1.0.0",
+  "description": "Agent Nations — AI agent layer + blockchain integration for Base Sepolia.",
+  "main": "dist/runCycle.js",
+  "scripts": {
+    "build": "tsc --project tsconfig.json",
+    "test-agents": "npx ts-node --project tsconfig.json src/testAgents.ts",
+    "cycle": "npx ts-node --project tsconfig.json src/runCycle.ts",
+    "typecheck": "tsc --noEmit",
+    "serve": "npx ts-node --project tsconfig.json src/api/server.ts"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^16.4.5",
+    "ethers": "^6.16.0",
+    "express": "^4.22.2",
+    "openai": "^4.52.7",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^4.17.25",
+    "@types/node": "^20.14.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
